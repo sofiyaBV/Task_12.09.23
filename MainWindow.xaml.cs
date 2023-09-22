@@ -24,5 +24,20 @@ namespace Task_12._09._23
         {
             InitializeComponent();
         }
+        private void DisplayDateTime(TextBlock targetTextBlock)
+        {
+            DateTime currentDateTime = DateTime.Now;
+            string formattedDateTime = $"{currentDateTime}";
+            Dispatcher.Invoke(() => targetTextBlock.Text = formattedDateTime);
+        }
+        private void Start_click(object sender, RoutedEventArgs e)
+        {
+            Task task1 = new Task(() => DisplayDateTime(Start_tb));
+            task1.Start();
+
+            Task task2 = Task.Factory.StartNew(() => DisplayDateTime(StartNew_tb));
+
+            Task task3 = Task.Run(() => DisplayDateTime(Run_tb));
+        }
     }
 }
